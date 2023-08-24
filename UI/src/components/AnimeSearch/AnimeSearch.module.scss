@@ -1,0 +1,51 @@
+.animeListContainer {
+  width: 100%;
+  padding: 24px 0;
+  color: black;
+  font-weight: bolder;
+  font-size: 16px;
+  text-shadow: -1px 1px 0 #fff, 1px 1px 0 #fff, 1px -1px 0 #fff,
+    -1px -1px 0 #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .imageList {
+    width: fit-content;
+    .noImageContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 386px;
+      height: 100%;
+      flex-direction: column;
+      text-align: center;
+    }
+    .imageContainer {
+      overflow: hidden;
+      position: relative;
+      min-height: 386px;
+      .overlay {
+        background-color: #c6c7c780;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        opacity: 0;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+      img {
+        object-fit: contain;
+        width: 270px;
+      }
+    }
+  }
+}

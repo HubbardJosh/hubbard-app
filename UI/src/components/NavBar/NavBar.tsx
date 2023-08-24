@@ -12,7 +12,7 @@ export function NavBar() {
   return (
     <Box className={styles.navBarContainer}>
       {links.map((link) => (
-        <Link className={styles.navLink} to={link.url}>
+        <Link className={styles.navLink} to={link.url} key={link.url}>
           {link.displayName}
         </Link>
       ))}
