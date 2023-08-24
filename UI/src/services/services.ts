@@ -1,4 +1,5 @@
-const BASE_API_URL = "https://kitsu.io/api/edge";
+import { DEFAULT_PAGE_SIZE } from "../util/constants";
+const BASE_API_URL = "https://api.jikan.moe/v4";
 
 class ApiService {
   private url: string;
@@ -38,9 +39,9 @@ class ApiService {
 
 const apiService = new ApiService();
 
-export const getAnime = async (pageSize?: number, pageOffset?: number) => {
+export const getAnime = async (page?: number) => {
   const rsp = await apiService.get(
-    `anime?page[limit]=${pageSize ?? 10}&page[offset]=${pageOffset ?? 0}`
+    `anime?limit=${DEFAULT_PAGE_SIZE}&page=${page ?? 1}`
   );
   return { status: rsp.status, body: rsp.body };
 };

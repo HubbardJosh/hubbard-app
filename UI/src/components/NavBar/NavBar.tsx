@@ -6,7 +6,7 @@ import styles from "./NavBar.module.scss";
 export function NavBar() {
   const links: NavLink[] = [
     { displayName: "Home", url: "/" },
-    { displayName: "Test Page", url: "/test" },
+    { displayName: "Anime Search", url: "/anime-search" },
   ];
 
   return (

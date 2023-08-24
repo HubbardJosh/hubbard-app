@@ -2,32 +2,30 @@ import Box from "@mui/material/Box";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { useEffect, useState } from "react";
-import { getAnime } from "../../services/services";
 import { AnimeResponse } from "../../models/AnimeResponse";
-import styles from "./AnimeSearch.module.scss";
 import Pagination from "@mui/material/Pagination";
-import { DEFAULT_PAGE_SIZE } from "../../util/constants";
+import useGetAnime from "../../hooks/useGetAnime";
+import styles from "./AnimeSearch.module.scss";
 
 export function AnimeSearch() {
   const [anime, setAnime] = useState<AnimeResponse>();
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
+  const animeData = useGetAnime(currentPage);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   useEffect(() => {
-    async function fetchAnimeData() {
-      const rsp = await getAnime(20, (currentPage - 1) * DEFAULT_PAGE_SIZE);
-      setAnime(rsp.body);
-      setPageCount(Math.ceil(rsp?.body?.meta.count / DEFAULT_PAGE_SIZE));
+    if (animeData?.data) {
+      const { pagination } = animeData.data;
+      setAnime(animeData.data);
+      setPageCount(
+        Math.ceil(pagination.items.total / pagination.items.per_page)
+      );
     }
-    fetchAnimeData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const handlePageChange = async (page: number) => {
-    setCurrentPage(page);
-    const rsp = await getAnime(20, (page - 1) * DEFAULT_PAGE_SIZE);
-    setAnime(rsp.body);
-  };
+  }, [animeData.data]);
 
   const getRandomBGColor = () => {
     let val1 = Math.random() * 255;
@@ -41,25 +39,26 @@ export function AnimeSearch() {
     <Box className={styles.animeListContainer}>
       {anime && (
         <>
-          <ImageList className={styles.imageList} cols={5}>
-            {anime.data?.map((show: any) => (
+          <ImageList className={styles.imageList} cols={6}>
+            {anime?.data?.map((show: any) => (
               <ImageListItem sx={{ maxWidth: "270px" }} key={show.id}>
-                {show?.attributes?.coverImage ? (
+                {show?.images ? (
                   <Box className={styles.imageContainer}>
                     <Box className={styles.overlay}>
-                      {show?.attributes?.titles?.en ??
-                        show?.attributes?.titles?.en_jp ??
-                        ""}
-                      <br />
-                      {show?.attributes?.titles?.ja_jp ?? ""}
+                      {show?.title_english ??
+                        (show?.title !== show?.title_japanese
+                          ? show?.title
+                          : "")}
+                      <hr />
+                      {show?.title_japanese ?? ""}
                     </Box>
                     <img
                       src={
-                        show?.attributes?.posterImage?.small ??
-                        show?.attributes?.coverImage?.small ??
+                        show?.images?.webp?.large_image_url ??
+                        show?.images?.jpg?.large_image_url ??
                         ""
                       }
-                      alt={show?.attributes?.titles?.en ?? ""}
+                      alt={show?.title_english ?? show?.title_japanese ?? ""}
                       loading="lazy"
                     />
                   </Box>
@@ -70,11 +69,9 @@ export function AnimeSearch() {
                       backgroundColor: getRandomBGColor(),
                     }}
                   >
-                    {show?.attributes?.titles?.en ??
-                      show?.attributes?.titles?.en_jp ??
-                      ""}
-                    <br />
-                    {show?.attributes?.titles?.ja_jp ?? ""}
+                    {show?.title_english ?? ""}
+                    <hr />
+                    {show?.title_japanese ?? ""}
                   </Box>
                 )}
               </ImageListItem>
