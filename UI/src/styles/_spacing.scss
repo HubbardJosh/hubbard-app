@@ -1,0 +1,20 @@
+$page-padding: 30px;
+$profile-image-size: 40px;
+$scrollbar-width: 12px;
+$header-menu-height: 78px;
+$region-header-height: 45px;
+$header-border: 2px;
+$megaMenu-z-index: 100;
+$header-z-index: 9010; // Kontent web spotlight has high z-index
+$bookmark-load-modal: $header-z-index + 10;
+$preview-button-z-index: $header-z-index + 2;
+$skip-to-content-z-index: $header-z-index + 1;
+$search-suggestions-z-index: $header-z-index + 1;
+$overlay-z-index: 10;
+$home-hero-overlay-height-mobile: 250px;
+$megaMenu-height: 541px;
+$header-region-height: 45px;
+$header-main-nav-width: 475px;
+$lightbox-z-index: $header-z-index + 2;
+$apps-menu-z-index: $header-z-index + 1;
+$region-selector-z-index: $apps-menu-z-index + 1;

@@ -1,0 +1,90 @@
+@font-face {
+    font-family: 'Meta';
+    font-style: italic;
+    font-stretch: normal;
+    font-display: swap;
+    src: url('webFonts/FFMetaItalic/italic_normal.woff') format('woff'),
+        url('webFonts/FFMetaItalic/italic_normal.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Meta';
+    font-style: normal;
+    font-stretch: normal;
+    font-weight: lighter;
+    font-display: swap;
+    src: url('webFonts/FFMetaThin/normal_normal.woff') format('woff'),
+        url('webFonts/FFMetaThin/normal_normal.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Meta';
+    font-style: italic;
+    font-stretch: normal;
+    font-weight: lighter;
+    font-display: swap;
+    src: url('webFonts/FFMetaLightItalic/italic_normal.woff') format('woff'),
+        url('webFonts/FFMetaLightItalic/italic_normal.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'MetaBook';
+    font-style: normal;
+    font-stretch: normal;
+    font-display: swap;
+    src: url('webFonts/FFMetaBook/normal_normal.woff') format('woff'),
+        url('webFonts/FFMetaBook/normal_normal.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'MetaBook';
+    font-style: normal;
+    font-stretch: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('webFonts/FFMetaMedium/normal_normal.woff') format('woff'),
+        url('webFonts/FFMetaMedium/normal_normal.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'MetaMedium';
+    font-style: normal;
+    font-stretch: normal;
+    font-display: swap;
+    src: url('webFonts/FFMetaBook/normal_normal.woff') format('woff'),
+        url('webFonts/FFMetaBook/normal_normal.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'MetaMedium';
+    font-style: normal;
+    font-stretch: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('webFonts/FFMetaMedium/normal_normal.woff') format('woff'),
+        url('webFonts/FFMetaMedium/normal_normal.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Meta';
+    font-style: normal;
+    font-stretch: normal;
+    font-weight: lighter;
+    font-display: swap;
+    src: url('webFonts/FFMetaLight/normal_normal.woff') format('woff'),
+        url('webFonts/FFMetaLight/normal_normal.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Meta';
+    font-style: normal;
+    font-stretch: normal;
+    font-display: swap;
+    src: url('webFonts/FFMetaRegular/normal_normal.woff') format('woff'),
+        url('webFonts/FFMetaRegular/normal_normal.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Meta';
+    font-style: normal;
+    font-stretch: normal;
+    font-weight: bold;
+    font-display: swap;
+    src: url('webFonts/FFMetaBold/normal_normal.woff') format('woff'),
+        url('webFonts/FFMetaBold/normal_normal.woff2') format('woff2');
+}
+
+$font-meta: Meta, sans-serif, system-ui;
+$font-meta-book: MetaBook, $font-meta;
+$font-meta-medium: MetaMedium, $font-meta;

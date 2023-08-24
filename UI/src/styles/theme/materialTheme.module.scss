@@ -1,0 +1,19 @@
+@use 'src/styles/colors';
+
+:export {
+    colorPrimary: colors.$color-primary;
+    colorSecondary: colors.$color-secondary;
+    colorDark: colors.$color-dark;
+    colorDarker: colors.$color-darker;
+    colorWarningStrong: colors.$color-warning-strong;
+    colorWarningLite: colors.$color-warning-lite;
+    colorRichboxOutline: colors.$color-richbox-outline;
+    colorFilterPill: colors.$color-filter-pill;
+    colorBluegreen: colors.$color-bluegreen;
+    colorHmRed: colors.$color-hm-red;
+    colorBookmarkRed: colors.$color-bookmark-red;
+    colorWhite: colors.$color-white;
+    colorSlider: colors.$color-slider;
+    colorDarkText: colors.$color-dark-text;
+    colorOverlay: colors.$color-overlay;
+}
