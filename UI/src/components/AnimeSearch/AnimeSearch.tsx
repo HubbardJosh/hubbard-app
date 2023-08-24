@@ -1,5 +1,4 @@
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { useEffect, useState } from "react";
@@ -13,7 +12,6 @@ export function AnimeSearch() {
   const [anime, setAnime] = useState<AnimeResponse>();
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
-  const handleTestClick = async () => {};
 
   useEffect(() => {
     async function fetchAnimeData() {
@@ -41,7 +39,6 @@ export function AnimeSearch() {
 
   return (
     <Box className={styles.animeListContainer}>
-      <Button onClick={() => handleTestClick()}>Get</Button>
       {anime && (
         <>
           <ImageList className={styles.imageList} cols={5}>
