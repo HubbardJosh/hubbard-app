@@ -3,6 +3,7 @@ import { Home } from "../Home/Home";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { RouteLayout } from "../Routes/RouteLayout";
 import { materialTheme } from "../../styles/theme/materialTheme";
+import { AnimeSearch } from "../AnimeSearch/AnimeSearch";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/anime-search",
+        element: <AnimeSearch />,
       },
     ],
   },
