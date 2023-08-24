@@ -38,8 +38,10 @@ class ApiService {
 
 const apiService = new ApiService();
 
-export const getAnime = async (pageSize?: number) => {
-  const rsp = await apiService.get(`anime?page[limit]=${pageSize ?? 10}`);
+export const getAnime = async (pageSize?: number, pageOffset?: number) => {
+  const rsp = await apiService.get(
+    `anime?page[limit]=${pageSize ?? 10}&page[offset]=${pageOffset ?? 0}`
+  );
   return { status: rsp.status, body: rsp.body };
 };
 export const getAnimeById = async (id: string) => {
