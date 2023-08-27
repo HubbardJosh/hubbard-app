@@ -2,18 +2,21 @@ import { useEffect, useState } from "react";
 import { getAnime } from "../services/services";
 import { AnimeResponse } from "../models/AnimeResponse";
 
-export default function useGetAnime(page: number) {
-  const [data, setData] = useState<AnimeResponse>();
+export default function useGetAnime(page: number, letter?: string) {
+  const [animeData, setAnimeData] = useState<AnimeResponse>();
   const [status, setStatus] = useState<number>();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     (async function fetchAnimeData(pageNum: number) {
-      const rsp = await getAnime(pageNum);
+      setLoading(true);
+      const rsp = await getAnime(pageNum, letter);
       console.log({ rsp });
-      setData(rsp.body);
+      setAnimeData(rsp.body);
       setStatus(rsp.status);
+      setLoading(false);
     })(page);
-  }, [page]);
+  }, [letter, page]);
 
-  return { data, status };
+  return { animeData, status, loading };
 }

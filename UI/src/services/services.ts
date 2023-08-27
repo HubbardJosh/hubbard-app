@@ -39,9 +39,11 @@ class ApiService {
 
 const apiService = new ApiService();
 
-export const getAnime = async (page?: number) => {
+export const getAnime = async (page?: number, letter?: string) => {
   const rsp = await apiService.get(
-    `anime?limit=${DEFAULT_PAGE_SIZE}&page=${page ?? 1}`
+    `anime?limit=${DEFAULT_PAGE_SIZE}&order_by=title&sort=asc&page=${
+      page ?? 1
+    }${letter ? `&letter=${letter}` : ""}`
   );
   return { status: rsp.status, body: rsp.body };
 };

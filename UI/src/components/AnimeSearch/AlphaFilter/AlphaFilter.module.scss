@@ -1,0 +1,19 @@
+.breadcrumbs {
+  ol {
+    column-gap: 12px;
+    li {
+      .selected {
+        font-weight: bolder;
+      }
+      button {
+        border-radius: 50%;
+        min-width: 36.5px;
+        max-width: 36.5px;
+        padding: initial 0;
+        span {
+          max-width: 0;
+        }
+      }
+    }
+  }
+}

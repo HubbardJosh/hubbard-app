@@ -8,3 +8,9 @@ a {
 body {
   padding: 0 24px;
 }
+
+li {
+  &.MuiBreadcrumbs-separator {
+    display: none !important;
+  }
+}

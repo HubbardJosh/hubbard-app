@@ -2,30 +2,36 @@ import Box from "@mui/material/Box";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { useEffect, useState } from "react";
-import { AnimeResponse } from "../../models/AnimeResponse";
 import Pagination from "@mui/material/Pagination";
 import useGetAnime from "../../hooks/useGetAnime";
 import styles from "./AnimeSearch.module.scss";
+import { AlphaFilter } from "./AlphaFilter/AlphaFilter";
 
 export function AnimeSearch() {
-  const [anime, setAnime] = useState<AnimeResponse>();
-  const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
-  const animeData = useGetAnime(currentPage);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedChar, setSelectedChar] = useState<string>("");
+  const { animeData, loading } = useGetAnime(currentPage, selectedChar);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
+  const handleCharSelect = (char: string) => {
+    const ch = char === "All" ? "" : char;
+    setSelectedChar(ch);
+    setCurrentPage(1);
+  };
+
   useEffect(() => {
-    if (animeData?.data) {
-      const { pagination } = animeData.data;
-      setAnime(animeData.data);
+    if (!loading && animeData) {
+      console.log({ animeData });
+      const { pagination } = animeData;
       setPageCount(
-        Math.ceil(pagination.items.total / pagination.items.per_page)
+        Math.ceil(pagination?.items.total / pagination?.items.per_page)
       );
     }
-  }, [animeData.data]);
+  }, [animeData, loading]);
 
   const getRandomBGColor = () => {
     let val1 = Math.random() * 255;
@@ -37,20 +43,35 @@ export function AnimeSearch() {
 
   return (
     <Box className={styles.animeListContainer}>
-      {anime && (
+      <AlphaFilter selectChange={(ch) => handleCharSelect(ch)} />
+      {!loading && animeData && (
         <>
           <ImageList className={styles.imageList} cols={6}>
-            {anime?.data?.map((show: any) => (
-              <ImageListItem sx={{ maxWidth: "270px" }} key={show.id}>
+            {animeData?.data?.map((show: any) => (
+              <ImageListItem sx={{ maxWidth: "270px" }} key={show.mal_id}>
                 {show?.images ? (
                   <Box className={styles.imageContainer}>
                     <Box className={styles.overlay}>
-                      {show?.title_english ??
-                        (show?.title !== show?.title_japanese
-                          ? show?.title
-                          : "")}
-                      <hr />
-                      {show?.title_japanese ?? ""}
+                      {show?.titles
+                        ?.filter(
+                          (t) =>
+                            t.type === "Default" ||
+                            t.type === "English" ||
+                            t.type === "Japanese"
+                        )
+                        ?.sort((a, _) =>
+                          a.type === "English"
+                            ? -1
+                            : a.type === "Default"
+                            ? 0
+                            : 1
+                        )
+                        ?.map((title, i, arr) => (
+                          <>
+                            {title.title}
+                            {i !== arr.length - 1 && <hr />}
+                          </>
+                        ))}
                     </Box>
                     <img
                       src={
@@ -79,6 +100,9 @@ export function AnimeSearch() {
           </ImageList>
           <Pagination
             count={pageCount}
+            page={currentPage}
+            siblingCount={2}
+            boundaryCount={1}
             onChange={(_, page) => handlePageChange(page)}
           />
         </>
