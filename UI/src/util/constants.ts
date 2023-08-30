@@ -12,5 +12,5 @@ export const RATING_FILTERS: { [key: string]: Filter } = {
     description: "17+ (violence & profanity)",
   },
   r: { val: "r", displayVal: "R+", description: "Mild Nudity" },
-  //   rx: { val: "rx", displayVal: "Rx", description: "Hentai" },
+  rx: { val: "rx", displayVal: "Rx", description: "Hentai" },
 };
