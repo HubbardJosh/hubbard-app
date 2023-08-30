@@ -11,15 +11,16 @@
   align-items: center;
 
   .imageList {
-    width: fit-content;
+    .totalCountLabel {
+      width: 100%;
+    }
     .noImageContainer {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      min-height: 334px;
-      max-height: 334px;
       height: 100%;
+      width: 100%;
       flex-direction: column;
       text-align: center;
       padding: 8px;
@@ -28,9 +29,8 @@
     .imageContainer {
       overflow: hidden;
       position: relative;
-      min-height: 334px;
-      max-height: 334px;
       height: 100%;
+      width: 100%;
       border-radius: 3px;
       .overlay {
         background-color: #c6c7c780;
@@ -59,7 +59,7 @@
       img {
         object-fit: cover;
         height: 100%;
-        width: 270px;
+        width: 100%;
       }
     }
   }

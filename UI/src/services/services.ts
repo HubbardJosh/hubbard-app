@@ -1,3 +1,4 @@
+import { SelectedFilters } from "../models/Filter";
 import { DEFAULT_PAGE_SIZE } from "../util/constants";
 const BASE_API_URL = "https://api.jikan.moe/v4";
 
@@ -39,11 +40,25 @@ class ApiService {
 
 const apiService = new ApiService();
 
-export const getAnime = async (page?: number, letter?: string) => {
+export const getAnime = async (
+  page?: number,
+  letter?: string,
+  filters?: {
+    [key: string]: SelectedFilters;
+  }
+) => {
   const rsp = await apiService.get(
     `anime?limit=${DEFAULT_PAGE_SIZE}&order_by=title&sort=asc&page=${
       page ?? 1
-    }${letter ? `&letter=${letter}` : ""}`
+    }${letter && letter !== "#" ? `&letter=${letter}` : ""}${
+      filters && Object.keys(filters).length > 0
+        ? `${Object.values(filters)
+            .map(
+              (v) => `&${v.filterType}=${v.filters.join(`&${v.filterType}=`)}`
+            )
+            .join("")}`
+        : ""
+    }`
   );
   return { status: rsp.status, body: rsp.body };
 };

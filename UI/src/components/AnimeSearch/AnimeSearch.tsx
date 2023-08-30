@@ -6,12 +6,23 @@ import Pagination from "@mui/material/Pagination";
 import useGetAnime from "../../hooks/useGetAnime";
 import styles from "./AnimeSearch.module.scss";
 import { AlphaFilter } from "./AlphaFilter/AlphaFilter";
+import { DropdownFilter } from "../Shared/DropdownFilter/DropdownFilter";
+import { RATING_FILTERS } from "../../util/constants";
+import { FilterTypes, SelectedFilters } from "../../models/Filter";
+import Typography from "@mui/material/Typography";
 
 export function AnimeSearch() {
   const [pageCount, setPageCount] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedChar, setSelectedChar] = useState<string>("");
-  const { animeData, loading } = useGetAnime(currentPage, selectedChar);
+  const [selectedFilters, setSelectedFilters] = useState<{
+    [key: string]: SelectedFilters;
+  }>({});
+  const { animeData, loading } = useGetAnime(
+    currentPage,
+    selectedChar,
+    selectedFilters
+  );
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -21,6 +32,28 @@ export function AnimeSearch() {
     const ch = char === "All" ? "" : char;
     setSelectedChar(ch);
     setCurrentPage(1);
+  };
+
+  const handleFilterSelect = (filters: string[], filterType: FilterTypes) => {
+    console.log({ filters, filterType });
+
+    if (filters.length > 0) {
+      const updatedFilters: {
+        [key: string]: SelectedFilters;
+      } = {
+        ...selectedFilters,
+        [filterType as string]: { filters, filterType },
+      };
+      setSelectedFilters(updatedFilters);
+    } else {
+      const updatedFilters: {
+        [key: string]: SelectedFilters;
+      } = {
+        ...selectedFilters,
+      };
+      delete updatedFilters[filterType as string];
+      setSelectedFilters(updatedFilters);
+    }
   };
 
   useEffect(() => {
@@ -43,9 +76,20 @@ export function AnimeSearch() {
 
   return (
     <Box className={styles.animeListContainer}>
+      <DropdownFilter
+        filters={RATING_FILTERS}
+        dropdownLabel="Ratings Select"
+        filterType={FilterTypes.rating}
+        handleSelectedFilters={(filters, filterType) =>
+          handleFilterSelect(filters, filterType)
+        }
+      />
       <AlphaFilter selectChange={(ch) => handleCharSelect(ch)} />
       {!loading && animeData && (
         <>
+          <Typography className={styles.totalCountLabel}>
+            Total: {animeData?.pagination?.items.total}
+          </Typography>
           <ImageList className={styles.imageList} cols={6}>
             {animeData?.data?.map((show: any) => (
               <ImageListItem sx={{ maxWidth: "270px" }} key={show.mal_id}>

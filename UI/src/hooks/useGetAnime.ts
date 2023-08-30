@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
 import { getAnime } from "../services/services";
 import { AnimeResponse } from "../models/AnimeResponse";
+import { SelectedFilters } from "../models/Filter";
 
-export default function useGetAnime(page: number, letter?: string) {
+export default function useGetAnime(
+  page: number,
+  letter?: string,
+  filters?: {
+    [key: string]: SelectedFilters;
+  }
+) {
   const [animeData, setAnimeData] = useState<AnimeResponse>();
   const [status, setStatus] = useState<number>();
   const [loading, setLoading] = useState(false);
@@ -10,13 +17,13 @@ export default function useGetAnime(page: number, letter?: string) {
   useEffect(() => {
     (async function fetchAnimeData(pageNum: number) {
       setLoading(true);
-      const rsp = await getAnime(pageNum, letter);
+      const rsp = await getAnime(pageNum, letter, filters);
       console.log({ rsp });
       setAnimeData(rsp.body);
       setStatus(rsp.status);
       setLoading(false);
     })(page);
-  }, [letter, page]);
+  }, [filters, letter, page]);
 
   return { animeData, status, loading };
 }
