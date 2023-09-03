@@ -13,6 +13,7 @@ interface DropdownFilterProps {
   filters: { [key: string]: Filter };
   dropdownLabel?: string;
   filterType: FilterTypes;
+  isMultiSelect?: boolean;
   handleSelectedFilters: (filters: string[], filterType: FilterTypes) => void;
 }
 
@@ -20,6 +21,7 @@ export function DropdownFilter({
   filters,
   dropdownLabel,
   filterType,
+  isMultiSelect = false,
   handleSelectedFilters,
 }: DropdownFilterProps) {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
@@ -42,7 +44,7 @@ export function DropdownFilter({
       <FormControl size="small">
         <InputLabel>{dropdownLabel ?? ""}</InputLabel>
         <Select
-          multiple={true}
+          multiple={isMultiSelect}
           value={selectedFilters}
           onChange={handleFilterSelect}
           input={<OutlinedInput label="Tag" />}

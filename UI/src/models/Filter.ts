@@ -4,9 +4,14 @@ export interface Filter {
   description?: string;
 }
 
+export enum SortTypes {
+  "score" = "score",
+  "title" = "title",
+}
+
 export enum FilterTypes {
   "rating" = "rating",
-  "test" = "test",
+  "sort" = "sort",
 }
 
 export interface SelectedFilters {

@@ -41,14 +41,15 @@ class ApiService {
 const apiService = new ApiService();
 
 export const getAnime = async (
-  page?: number,
+  page: number,
+  sort: string,
   letter?: string,
   filters?: {
     [key: string]: SelectedFilters;
   }
 ) => {
   const rsp = await apiService.get(
-    `anime?limit=${DEFAULT_PAGE_SIZE}&order_by=title&sort=asc&page=${
+    `anime?limit=${DEFAULT_PAGE_SIZE}&order_by=${sort}&sort=asc&page=${
       page ?? 1
     }${letter && letter !== "#" ? `&letter=${letter}` : ""}${
       filters && Object.keys(filters).length > 0

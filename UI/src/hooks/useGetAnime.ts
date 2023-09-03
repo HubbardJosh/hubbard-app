@@ -5,6 +5,7 @@ import { SelectedFilters } from "../models/Filter";
 
 export default function useGetAnime(
   page: number,
+  sort?: string,
   letter?: string,
   filters?: {
     [key: string]: SelectedFilters;
@@ -17,13 +18,13 @@ export default function useGetAnime(
   useEffect(() => {
     (async function fetchAnimeData(pageNum: number) {
       setLoading(true);
-      const rsp = await getAnime(pageNum, letter, filters);
+      const rsp = await getAnime(pageNum, sort ?? "title", letter, filters);
       console.log({ rsp });
       setAnimeData(rsp.body);
       setStatus(rsp.status);
       setLoading(false);
     })(page);
-  }, [filters, letter, page]);
+  }, [filters, letter, page, sort]);
 
   return { animeData, status, loading };
 }

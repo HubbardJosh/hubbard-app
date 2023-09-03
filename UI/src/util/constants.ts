@@ -14,3 +14,16 @@ export const RATING_FILTERS: { [key: string]: Filter } = {
   r: { val: "r", displayVal: "R+", description: "Mild Nudity" },
   rx: { val: "rx", displayVal: "Rx", description: "Hentai" },
 };
+
+export const SCORE_FILTERS: { [key: string]: Filter } = {
+  asc: {
+    val: "asc",
+    displayVal: "Low to High",
+    description: "Sort by score - Low to High",
+  },
+  desc: {
+    val: "desc",
+    displayVal: "High to Low",
+    description: "Sort by score - High to Low",
+  },
+};
