@@ -49,7 +49,7 @@ export const getAnime = async (
   }
 ) => {
   const rsp = await apiService.get(
-    `anime?limit=${DEFAULT_PAGE_SIZE}&order_by=${sort}&sort=asc&page=${
+    `anime?sfw&limit=${DEFAULT_PAGE_SIZE}&order_by=${sort}&sort=asc&page=${
       page ?? 1
     }${letter && letter !== "#" ? `&letter=${letter}` : ""}${
       filters && Object.keys(filters).length > 0

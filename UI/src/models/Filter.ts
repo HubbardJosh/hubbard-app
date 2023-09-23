@@ -12,6 +12,7 @@ export enum SortTypes {
 export enum FilterTypes {
   "rating" = "rating",
   "sort" = "sort",
+  "type" = "type",
 }
 
 export interface SelectedFilters {

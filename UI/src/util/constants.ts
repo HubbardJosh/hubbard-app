@@ -12,7 +12,6 @@ export const RATING_FILTERS: { [key: string]: Filter } = {
     description: "17+ (violence & profanity)",
   },
   r: { val: "r", displayVal: "R+", description: "Mild Nudity" },
-  rx: { val: "rx", displayVal: "Rx", description: "Hentai" },
 };
 
 export const SCORE_FILTERS: { [key: string]: Filter } = {
@@ -25,5 +24,38 @@ export const SCORE_FILTERS: { [key: string]: Filter } = {
     val: "desc",
     displayVal: "High to Low",
     description: "Sort by score - High to Low",
+  },
+};
+
+export const TYPE_FILTERS: { [key: string]: Filter } = {
+  movie: {
+    val: "movie",
+    displayVal: "Movie",
+    description: "Sort by type: Movie",
+  },
+  music: {
+    val: "music",
+    displayVal: "Music",
+    description: "Sort by type: Music",
+  },
+  ona: {
+    val: "ona",
+    displayVal: "ONA",
+    description: "Sort by type: ONA",
+  },
+  ova: {
+    val: "ova",
+    displayVal: "OVA",
+    description: "Sort by type: OVA",
+  },
+  special: {
+    val: "special",
+    displayVal: "Special",
+    description: "Sort by type: Special",
+  },
+  tv: {
+    val: "tv",
+    displayVal: "TV",
+    description: "Sort by type: TV",
   },
 };

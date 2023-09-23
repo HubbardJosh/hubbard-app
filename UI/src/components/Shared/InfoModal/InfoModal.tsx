@@ -1,9 +1,8 @@
-import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import styles from "./InfoModal.module.scss";
 import { NavLink } from "react-router-dom";
+import Dialog from "@mui/material/Dialog";
 
 interface InfoModalProps {
   isOpen: boolean;
@@ -17,12 +16,9 @@ export function InfoModal({
   trailerUrl,
   title,
 }: InfoModalProps) {
-  console.log({ trailerUrl });
-  const [preventClose, setPreventClose] = useState(true);
   const keyPress = useCallback(
     (e: { key: string }) => {
       if (e.key === "Escape") {
-        setPreventClose(true);
         close();
       }
     },
@@ -34,35 +30,33 @@ export function InfoModal({
   }, [keyPress]);
 
   return (
-    <Backdrop open={isOpen} sx={{ zIndex: 998 }}>
-      <ClickAwayListener
-        onClickAway={() => {
-          if (preventClose) {
-            setPreventClose(false);
-          } else {
-            setPreventClose(true);
-            close();
-          }
-        }}
-      >
-        <Box className={styles.modalContainer}>
-          {`Title: ${title}`}
-          <Box>
-            {"Trailer: "}
-            {trailerUrl ? (
-              <NavLink
-                to={trailerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {trailerUrl}
-              </NavLink>
-            ) : (
-              <>N/A</>
-            )}
-          </Box>
+    <Dialog
+      className={styles.dialog}
+      open={isOpen}
+      onClose={close}
+      PaperProps={{
+        sx: {
+          width: "100%",
+          maxWidth: "75%",
+          "::-webkit-scrollbar-track": { background: "transparent" },
+          scrollbarColor: "#acacac transparent",
+        },
+      }}
+      disableScrollLock
+    >
+      <Box className={styles.modalContainer}>
+        {`Title: ${title}`}
+        <Box>
+          {"Trailer: "}
+          {trailerUrl ? (
+            <NavLink to={trailerUrl} target="_blank" rel="noopener noreferrer">
+              {trailerUrl}
+            </NavLink>
+          ) : (
+            <>N/A</>
+          )}
         </Box>
-      </ClickAwayListener>
-    </Backdrop>
+      </Box>
+    </Dialog>
   );
 }

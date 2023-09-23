@@ -4,6 +4,8 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { RouteLayout } from "../Routes/RouteLayout";
 import { materialTheme } from "../../styles/theme/materialTheme";
 import { AnimeSearch } from "../AnimeSearch/AnimeSearch";
+// import { useState } from "react";
+// import { AgeVerificationModal } from "../Shared/AgeVerificationModal/AgeVerificationModal";
 
 const router = createBrowserRouter([
   {
@@ -23,10 +25,25 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  // const [isAgeVerified, setIsAgeVerified] = useState(false);
+
+  // const handleAgeVerification = () => {
+  //   setIsAgeVerified(true);
+  // };
   return (
-    <ThemeProvider theme={materialTheme}>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <>
+      {/* {isAgeVerified ? ( */}
+      <ThemeProvider theme={materialTheme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+      {/* ) : (
+        <AgeVerificationModal
+          onVerified={handleAgeVerification}
+          isOpen
+          onClose={() => null}
+        />
+      )} */}
+    </>
   );
 }
 

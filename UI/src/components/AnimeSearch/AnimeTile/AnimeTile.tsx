@@ -13,28 +13,39 @@ interface AnimeTileProps {
   imageUrl?: string;
   trailerUrl?: string;
   score?: string;
+  type?: string;
 }
 export function AnimeTile({
   trailerUrl,
   titles,
   imageUrl,
   score,
+  type,
 }: AnimeTileProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  console.log({ titles, imageUrl, trailerUrl });
 
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+
   return (
-    <Box className={styles.tileContainer} onClick={() => setIsModalOpen(true)}>
+    <Box
+      className={styles.tileContainer}
+      onMouseUp={() => setIsModalOpen(true)}
+    >
+      <InfoModal
+        isOpen={isModalOpen}
+        close={() => handleModalClose()}
+        trailerUrl={trailerUrl}
+        title={titles?.find((t) => t.order === 1)?.text ?? "No Title"}
+      />
       {trailerUrl && (
         <Icon className={styles.trailerIcon}>
           <VideocamIcon />
         </Icon>
       )}
       {score && <Typography className={styles.scoreLabel}>{score}</Typography>}
+      {type && <Typography className={styles.typeLabel}>{type}</Typography>}
       {imageUrl ? (
         <Box className={styles.imageContainer}>
           <Box className={styles.overlay}>
@@ -70,13 +81,6 @@ export function AnimeTile({
             ))}
         </Box>
       )}
-
-      <InfoModal
-        isOpen={isModalOpen}
-        close={handleModalClose}
-        trailerUrl={trailerUrl}
-        title={titles?.find((t) => t.order === 1)?.text ?? "No Title"}
-      />
     </Box>
   );
 }

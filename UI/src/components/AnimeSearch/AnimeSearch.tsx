@@ -7,7 +7,11 @@ import useGetAnime from "../../hooks/useGetAnime";
 import styles from "./AnimeSearch.module.scss";
 import { AlphaFilter } from "./AlphaFilter/AlphaFilter";
 import { DropdownFilter } from "../Shared/DropdownFilter/DropdownFilter";
-import { RATING_FILTERS, SCORE_FILTERS } from "../../util/constants";
+import {
+  RATING_FILTERS,
+  SCORE_FILTERS,
+  TYPE_FILTERS,
+} from "../../util/constants";
 import { FilterTypes, SelectedFilters, SortTypes } from "../../models/Filter";
 import Typography from "@mui/material/Typography";
 import { AnimeTile } from "./AnimeTile/AnimeTile";
@@ -68,7 +72,6 @@ export function AnimeSearch() {
 
   useEffect(() => {
     if (!loading && animeData) {
-      console.log({ animeData });
       const { pagination } = animeData;
       setPageCount(
         Math.ceil(pagination?.items.total / pagination?.items.per_page)
@@ -96,6 +99,15 @@ export function AnimeSearch() {
         }
         isMultiSelect={false}
       />
+      <DropdownFilter
+        filters={TYPE_FILTERS}
+        dropdownLabel="Sort by Type"
+        filterType={FilterTypes.type}
+        handleSelectedFilters={(filters, filterType) =>
+          handleFilterSelect(filters, filterType)
+        }
+        isMultiSelect
+      />
       <AlphaFilter selectChange={(ch) => handleCharSelect(ch)} />
       {!loading && animeData && (
         <>
@@ -104,7 +116,10 @@ export function AnimeSearch() {
           </Typography>
           <ImageList className={styles.imageList} cols={6}>
             {animeData?.data?.map((show: any) => (
-              <ImageListItem sx={{ maxWidth: "270px" }} key={show.mal_id}>
+              <ImageListItem
+                sx={{ maxWidth: "270px", maxHeight: "420px" }}
+                key={show.mal_id}
+              >
                 <AnimeTile
                   titles={show?.titles
                     ?.filter(
@@ -124,6 +139,7 @@ export function AnimeSearch() {
                   }
                   trailerUrl={show?.trailer?.url}
                   score={show?.score}
+                  type={show?.type}
                   key={show?.mal_id}
                 />
               </ImageListItem>
