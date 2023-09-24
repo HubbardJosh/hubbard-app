@@ -68,6 +68,7 @@ export function AnimeSearch() {
     if (newSort) {
       setSort(newSort);
     }
+    setCurrentPage(1);
   };
 
   useEffect(() => {
@@ -91,15 +92,6 @@ export function AnimeSearch() {
         isMultiSelect
       />
       <DropdownFilter
-        filters={SCORE_FILTERS}
-        dropdownLabel="Sort by Score"
-        filterType={FilterTypes.sort}
-        handleSelectedFilters={(filters, filterType) =>
-          handleFilterSelect(filters, filterType, SortTypes.score)
-        }
-        isMultiSelect={false}
-      />
-      <DropdownFilter
         filters={TYPE_FILTERS}
         dropdownLabel="Sort by Type"
         filterType={FilterTypes.type}
@@ -107,6 +99,15 @@ export function AnimeSearch() {
           handleFilterSelect(filters, filterType)
         }
         isMultiSelect
+      />
+      <DropdownFilter
+        filters={SCORE_FILTERS}
+        dropdownLabel="Sort by Score"
+        filterType={FilterTypes.sort}
+        handleSelectedFilters={(filters, filterType) =>
+          handleFilterSelect(filters, filterType, SortTypes.score)
+        }
+        isMultiSelect={false}
       />
       <AlphaFilter selectChange={(ch) => handleCharSelect(ch)} />
       {!loading && animeData && (
@@ -117,10 +118,16 @@ export function AnimeSearch() {
           <ImageList className={styles.imageList} cols={6}>
             {animeData?.data?.map((show: any) => (
               <ImageListItem
-                sx={{ maxWidth: "270px", maxHeight: "420px" }}
+                sx={{
+                  maxWidth: "270px",
+                  maxHeight: "420px",
+                  width: "100%",
+                  height: "100%",
+                }}
                 key={show.mal_id}
               >
                 <AnimeTile
+                  key={show?.mal_id}
                   titles={show?.titles
                     ?.filter(
                       (t) =>
@@ -140,7 +147,7 @@ export function AnimeSearch() {
                   trailerUrl={show?.trailer?.url}
                   score={show?.score}
                   type={show?.type}
-                  key={show?.mal_id}
+                  rating={show?.rating}
                 />
               </ImageListItem>
             ))}
@@ -150,6 +157,12 @@ export function AnimeSearch() {
             page={currentPage}
             siblingCount={2}
             boundaryCount={1}
+            sx={{
+              "& .MuiPaginationItem-root.Mui-selected": {
+                backgroundColor: "rgb(119, 136, 153, 35%)",
+                fontWeight: "bold",
+              },
+            }}
             onChange={(_, page) => handlePageChange(page)}
           />
         </>

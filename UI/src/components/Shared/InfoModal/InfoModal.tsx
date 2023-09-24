@@ -3,18 +3,21 @@ import { useCallback, useEffect } from "react";
 import styles from "./InfoModal.module.scss";
 import { NavLink } from "react-router-dom";
 import Dialog from "@mui/material/Dialog";
+import Typography from "@mui/material/Typography";
 
 interface InfoModalProps {
   isOpen: boolean;
   close: () => void;
   trailerUrl?: string;
   title: string;
+  rating?: string;
 }
 export function InfoModal({
   isOpen,
   close,
   trailerUrl,
   title,
+  rating,
 }: InfoModalProps) {
   const keyPress = useCallback(
     (e: { key: string }) => {
@@ -56,6 +59,7 @@ export function InfoModal({
             <>N/A</>
           )}
         </Box>
+        <Typography>{`Rating: ${rating}`}</Typography>
       </Box>
     </Dialog>
   );

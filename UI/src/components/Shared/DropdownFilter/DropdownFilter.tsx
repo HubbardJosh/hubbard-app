@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Filter, FilterTypes } from "../../../models/Filter";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import styles from "./DropdownFilter.module.scss";
+import Radio from "@mui/material/Radio";
 
 interface DropdownFilterProps {
   filters: { [key: string]: Filter };
@@ -73,7 +74,11 @@ export function DropdownFilter({
         >
           {Object.values(filters).map((filter) => (
             <MenuItem key={filter.val} value={filter.val}>
-              <Checkbox checked={selectedFilters.indexOf(filter.val) > -1} />
+              {isMultiSelect ? (
+                <Checkbox checked={selectedFilters.indexOf(filter.val) > -1} />
+              ) : (
+                <Radio checked={selectedFilters.indexOf(filter.val) > -1} />
+              )}
               <ListItemText primary={filter.displayVal} />
             </MenuItem>
           ))}

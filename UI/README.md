@@ -1,3 +1,18 @@
+### Project Info
+
+- API: Jikan - https://docs.api.jikan.moe/#tag/anime
+- Framework: React.JS
+
+### TODO
+
+- [ ] Search by title
+- [ ] Favorites/Likes/Dislike
+- [ ] Info Modal
+- [ ] Watch List
+- [ ] Watched
+- [ ] Season/Year/Genre Filter
+- [ ] Reset Filters
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

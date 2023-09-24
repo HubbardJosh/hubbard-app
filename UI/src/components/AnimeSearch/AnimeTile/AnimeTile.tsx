@@ -14,6 +14,7 @@ interface AnimeTileProps {
   trailerUrl?: string;
   score?: string;
   type?: string;
+  rating?: string;
 }
 export function AnimeTile({
   trailerUrl,
@@ -21,6 +22,7 @@ export function AnimeTile({
   imageUrl,
   score,
   type,
+  rating,
 }: AnimeTileProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -38,6 +40,7 @@ export function AnimeTile({
         close={() => handleModalClose()}
         trailerUrl={trailerUrl}
         title={titles?.find((t) => t.order === 1)?.text ?? "No Title"}
+        rating={rating}
       />
       {trailerUrl && (
         <Icon className={styles.trailerIcon}>
