@@ -6,12 +6,18 @@
 ### TODO
 
 - [ ] Search by title
-- [ ] Favorites/Likes/Dislike
-- [ ] Info Modal
-- [ ] Watch List
-- [ ] Watched
-- [ ] Season/Year/Genre Filter
+- [ ] Tile Skeleton when loading
 - [ ] Reset Filters
+- [ ] Favorites/Likes/Dislike
+- [ ] Info Modal - more data. Use data object rather than many props
+- [ ] Info Modal - embedded trailer?
+- [ ] To Watch List
+- [ ] Watched List
+- [ ] Season/Year/Genre Filter
+- [ ] Swiper Carousel for shows. Could be recommended/rating/season/... based for what to show
+- [ ] Page number in URL? Maybe other filters too?
+- [ ] Fix seemingly random instances where a tile row isn't the same height as the others
+- [ ] Tiles with no image change color on open/close of that tile's info modal
 
 # Getting Started with Create React App
 

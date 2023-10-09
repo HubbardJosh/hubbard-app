@@ -1,5 +1,9 @@
 import { Filter } from "../models/Filter";
 
+export enum TAB_VALUES {
+  Anime = "Anime",
+}
+
 export const DEFAULT_PAGE_SIZE = 24;
 
 export const RATING_FILTERS: { [key: string]: Filter } = {

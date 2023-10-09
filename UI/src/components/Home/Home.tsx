@@ -1,3 +1,11 @@
+import Box from "@mui/material/Box";
+import { PageTabs } from "../PageTabs/PageTabs";
+import styles from "./Home.module.scss";
+
 export function Home() {
-  return <span>Home</span>;
+  return (
+    <Box className={styles.tabsContainer}>
+      <PageTabs />
+    </Box>
+  );
 }

@@ -1,6 +1,8 @@
 .tileContainer {
   height: 100%;
   position: relative;
+  border: 1px solid lightgray;
+  border-radius: 4px;
   .scoreLabel {
     position: absolute;
     top: 12px;
@@ -45,8 +47,12 @@
     width: 100%;
     flex-direction: column;
     text-align: center;
-    padding: 8px;
     border-radius: 3px;
+    cursor: pointer;
+    hr {
+      border: none;
+      margin: 12px 0;
+    }
   }
   .imageContainer {
     overflow: hidden;

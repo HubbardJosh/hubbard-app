@@ -113,9 +113,9 @@ export function AnimeSearch() {
       {!loading && animeData && (
         <>
           <Typography className={styles.totalCountLabel}>
-            Total: {animeData?.pagination?.items.total}
+            Anime Count: {animeData?.pagination?.items.total}
           </Typography>
-          <ImageList className={styles.imageList} cols={6}>
+          <ImageList cols={6}>
             {animeData?.data?.map((show: any) => (
               <ImageListItem
                 sx={{

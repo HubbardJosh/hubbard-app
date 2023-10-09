@@ -7,6 +7,7 @@ import VideocamIcon from "@mui/icons-material/Videocam";
 import styles from "./AnimeTile.module.scss";
 import Icon from "@mui/material/Icon";
 import Typography from "@mui/material/Typography";
+import React from "react";
 
 interface AnimeTileProps {
   titles?: Title[];
@@ -49,16 +50,16 @@ export function AnimeTile({
       )}
       {score && <Typography className={styles.scoreLabel}>{score}</Typography>}
       {type && <Typography className={styles.typeLabel}>{type}</Typography>}
-      {imageUrl ? (
+      {imageUrl && !imageUrl.includes("apple-touch-icon") ? (
         <Box className={styles.imageContainer}>
           <Box className={styles.overlay}>
             {titles
               ?.sort((t1, t2) => (t1.order > t2.order ? 1 : -1))
               ?.map((title, i, arr) => (
-                <>
+                <React.Fragment key={`${title}_${i}`}>
                   {title.text}
                   {i !== arr.length - 1 && <hr />}
-                </>
+                </React.Fragment>
               ))}
           </Box>
           <img

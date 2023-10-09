@@ -59,7 +59,7 @@ export function InfoModal({
             <>N/A</>
           )}
         </Box>
-        <Typography>{`Rating: ${rating}`}</Typography>
+        {rating && <Typography>{`Rating: ${rating}`}</Typography>}
       </Box>
     </Dialog>
   );
